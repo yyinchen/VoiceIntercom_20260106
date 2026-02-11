@@ -4,7 +4,7 @@
 注意：C++实现了语音对讲和视频接收功能 视频发送端使用python实现
 
 # 创建socket连接
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+<!-- sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 receiver_addr = ('192.168.2.66', 8200)  # 接收端的IP  135
 send_video_queue = queue.Queue(maxsize=5)
 send_video_lock = threading.Lock()
@@ -62,4 +62,4 @@ if __name__ == '__main__':
     sock.close()
     # 释放资源
     cap.release()
-    cv2.destroyAllWindows()
+    cv2.destroyAllWindows() -->

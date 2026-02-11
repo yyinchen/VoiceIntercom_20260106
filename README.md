@@ -18,13 +18,10 @@ def on_send_video():
 
 def send_video_stream(frame, width=960, height=540, quality=80):
     compressed = cv2.resize(frame, (width, height), interpolation=cv2.INTER_AREA)
-    encode_param = [cv2.IMWRITE_JPEG_QUALITY, quality]  # 80%质量
-
+    encode_param = [cv2.IMWRITE_JPEG_QUALITY, quality] 
     rgb_frame = cv2.cvtColor(compressed, cv2.COLOR_BGR2RGB)
     _, buffer = cv2.imencode('.jpg', rgb_frame, encode_param)
     data = buffer.tobytes()
-
-    # 直接发送
     bytes_sent = sock.sendto(data, receiver_addr)
     if bytes_sent == len(data):
         print(f"✅ 发送成功: {bytes_sent}/{len(data)} 字节")
@@ -41,25 +38,18 @@ if __name__ == '__main__':
     cap.set(cv2.CAP_PROP_FOCUS, 42)
     focus_value = cap.get(cv2.CAP_PROP_FOCUS)
     print(f"当前焦距设置: {focus_value}")
-
     t_send_video = threading.Thread(target=on_send_video)
     t_send_video.start()
-
     while True:
         ret, frame = cap.read()
         if not ret:
             break
-
         with send_video_lock:
             send_video_queue.put(frame)
-
         cv2.imshow(' ', _frame)
-
-        # 按 'q' 键退出循环
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
     sock.close()
-    # 释放资源
     cap.release()
     cv2.destroyAllWindows() -->
+

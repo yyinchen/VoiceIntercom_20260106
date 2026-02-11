@@ -2,7 +2,7 @@
 基于QT C++区域网语音对话和实时视频监控
 
 注意：C++实现了语音对讲和视频接收功能 视频发送端使
-# # 用python实现
+用python实现
 ```python
 # 创建socket连接
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
